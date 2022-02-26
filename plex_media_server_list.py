@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
+
 import os
 import pandas as pd
 import datetime
 
 def get_files(path) -> dict:
     """Returns a dictionary of the filename, folder, file size, date modified and date accessed."""
-    
+
     library = {'File':[], 'Folder':[], 'Size (MB)':[], 'Modified':[], 'Accessed':[]}
-    
+
     for root, dirs, files in os.walk(path):
         for file in files:
             fileroot = os.path.basename(os.path.normpath(root))
@@ -17,8 +19,8 @@ def get_files(path) -> dict:
             library['File'].append(file)
             library['Size (MB)'].append(filesize)
             library['Modified'].append(modified)
-            library['Accessed'].append(accessed)       
-    
+            library['Accessed'].append(accessed)
+
     return library
 
 
@@ -32,4 +34,3 @@ def generate_csv(library):
 path = os.getcwd()
 library = get_files(path)
 generate_csv(library)
-
